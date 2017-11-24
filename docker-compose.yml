@@ -1,0 +1,20 @@
+version: "3"
+services:
+  auth-proxy:
+    build: ./docker/${CONTAINER}
+    image: ${ORGANIZATION}/auth-proxy:${BUILD_TAG}
+    restart: always
+    environment:
+      # - AUTH_PROXY_SERVICE_NAME=${CONTAINER}
+      - AUTH_PROXY_DOMAIN=${PROXY_DOMAIN}
+      - AUTH_PROXY_EMAIL=${PROXY_EMAIL}
+      - AUTH_PROXY_USER=${AUTH_PROXY_USER}
+      - AUTH_PROXY_PASS=${AUTH_PROXY_PASS}
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - overlay
+
+networks:
+    overlay:
